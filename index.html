@@ -1329,7 +1329,7 @@
       </section>
 
       <section class="slide dark section-slide video-section" data-title="Commercial AI Video">
-        <div class="video-section-bg"><video data-src="assets/作品集/品牌设计/玉泽（差异化广告视频）/玉泽.mp4" muted loop playsinline preload="none"></video></div>
+        <div class="video-section-bg"><video src="assets/作品集/品牌设计/玉泽（差异化广告视频）/玉泽.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
         <div class="section-visual reveal"><div class="section-dots"></div></div>
         <div class="topbar"><span class="meta">07 / Section</span><span class="meta">Commercial AI Video</span></div>
         <div class="section-line reveal"></div>
@@ -1347,19 +1347,19 @@
           </div>
           <div class="video-grid reveal">
             <article class="video-card">
-              <video data-src="assets/作品集/品牌设计/洁柔（IP视频）/b2fff0fbbf4414308348aaa8d972ae48.mp4" controls preload="none"></video>
+              <video src="assets/作品集/品牌设计/洁柔（IP视频）/b2fff0fbbf4414308348aaa8d972ae48.mp4" controls preload="metadata"></video>
               <div class="video-meta"><b>洁柔</b><span>IP 视频 / 品牌内容</span></div>
             </article>
             <article class="video-card">
-              <video data-src="assets/作品集/品牌设计/玉泽（差异化广告视频）/玉泽.mp4" controls preload="none"></video>
+              <video src="assets/作品集/品牌设计/玉泽（差异化广告视频）/玉泽.mp4" controls preload="metadata"></video>
               <div class="video-meta"><b>玉泽</b><span>差异化广告视频</span></div>
             </article>
             <article class="video-card">
-              <video data-src="assets/作品集/品牌设计/百雀羚（短剧视频）/7ae6b3fc01fa9f5127530da054734b26.mp4" controls preload="none"></video>
+              <video src="assets/作品集/品牌设计/百雀羚（短剧视频）/7ae6b3fc01fa9f5127530da054734b26.mp4" controls preload="metadata"></video>
               <div class="video-meta"><b>百雀羚</b><span>短剧视频</span></div>
             </article>
             <article class="video-card">
-              <video data-src="assets/作品集/品牌设计/软风（短剧视频）/总视频.mp4" controls preload="none"></video>
+              <video src="assets/作品集/品牌设计/软风（短剧视频）/总视频.mp4" controls preload="metadata"></video>
               <div class="video-meta"><b>软风研究社</b><span>商业叙事视频</span></div>
             </article>
           </div>
@@ -1379,7 +1379,7 @@
         <div class="topbar"><span class="meta">10 / Film Cases</span><span class="meta">Switchable Player</span></div>
         <div class="film-layout">
           <div class="main-player reveal">
-            <video id="filmPlayer" data-src="assets/作品集/Aigc短剧视频/影视级先导片-灯亮之前/df25f27cce87c259502dc31876a14aaf.mp4" controls preload="none"></video>
+            <video id="filmPlayer" src="assets/作品集/Aigc短剧视频/影视级先导片-灯亮之前/df25f27cce87c259502dc31876a14aaf.mp4" controls preload="metadata"></video>
           </div>
           <div class="stack">
             <h2 class="title-md reveal">AIGC Narrative Works</h2>
@@ -1606,22 +1606,10 @@
       current = target;
       track.style.transform = 'none';
       slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
-      hydrateSlideMedia(slides[current]);
       if (changed) playCaseOpening(slides[current]);
       progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
       pageNo.textContent = `${String(current + 1).padStart(2, '0')} / ${slides.length}`;
       pauseOffscreenVideos();
-    }
-
-    function hydrateSlideMedia(slide) {
-      slide.querySelectorAll('video[data-src]').forEach(video => {
-        if (!video.src) {
-          video.src = video.dataset.src;
-          video.load();
-        }
-      });
-      const bgVideo = slide.querySelector('.video-section-bg video');
-      if (bgVideo) bgVideo.play().catch(() => {});
     }
 
     function playCaseOpening(slide) {
@@ -1646,13 +1634,7 @@
 
     function pauseOffscreenVideos() {
       document.querySelectorAll('video').forEach(video => {
-        if (!slides[current].contains(video)) {
-          video.pause();
-          if (video.closest('.video-section-bg')) {
-            video.removeAttribute('src');
-            video.load();
-          }
-        }
+        if (!slides[current].contains(video)) video.pause();
       });
     }
 
@@ -1769,7 +1751,7 @@
       const colors = ['#ffffff', '#e9fbff', '#bdf8ff', '#5ceeff', '#fff5c8', '#ff5f8d'];
 
       function resize() {
-        dpr = Math.min(window.devicePixelRatio || 1, 1.35);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
         w = canvas.clientWidth;
         h = canvas.clientHeight;
         canvas.width = Math.floor(w * dpr);
@@ -1797,8 +1779,7 @@
         octx.font = `900 ${fontSize}px Inter, Arial, sans-serif`;
         octx.fillText(text, w / 2, h * .43);
         const img = octx.getImageData(0, 0, off.width, off.height);
-        const smallScreen = Math.min(w, h) < 720;
-        const gap = Math.max(smallScreen ? 5 : 4, Math.floor(Math.min(w, h) / (smallScreen ? 210 : 235)));
+        const gap = Math.max(3, Math.floor(Math.min(w, h) / 285));
         const coreX = w / 2;
         const coreY = h * .58;
         for (let y = 0; y < off.height; y += gap) {
@@ -1833,10 +1814,7 @@
             });
           }
         }
-        if (particles.length > 3200) {
-          particles.splice(3200);
-        }
-        const fieldCount = Math.min(smallScreen ? 520 : 850, Math.floor((w * h) / (smallScreen ? 1450 : 950)));
+        const fieldCount = Math.min(1500, Math.floor((w * h) / 430));
         for (let i = 0; i < fieldCount; i++) {
           const angle = Math.random() * Math.PI * 2;
           const radius = Math.pow(Math.random(), .45) * Math.max(w, h) * .85;
@@ -1896,7 +1874,7 @@
         ctx.fill();
 
         const rayPower = Math.max(flash, travel * (1 - gather) * .95);
-        for (let i = 0; i < 36; i++) {
+        for (let i = 0; i < 64; i++) {
           const angle = -Math.PI + (Math.PI * 2 * i) / 43 + Math.sin(t * .3 + i) * .035;
           const length = Math.max(w, h) * (.36 + rayPower * 1.1);
           const grad = ctx.createLinearGradient(coreX, coreY, coreX + Math.cos(angle) * length, coreY + Math.sin(angle) * length);
@@ -1929,7 +1907,7 @@
         ctx.clearRect(0, 0, w, h);
         const elapsedMs = time - startRaf;
         const t = time * .001;
-        const progress = Math.min(1, elapsedMs / 6500);
+        const progress = Math.min(1, elapsedMs / 7600);
         const burst = smooth(.08, .28, progress);
         const travel = smooth(.24, .5, progress);
         const gather = smooth(.48, .84, progress);
@@ -2026,9 +2004,7 @@
           }
         }
         ctx.restore();
-        if (progress < 1 || document.visibilityState === 'visible') {
-          requestAnimationFrame(animate);
-        }
+        requestAnimationFrame(animate);
       }
 
       canvas.addEventListener('mousemove', event => {
