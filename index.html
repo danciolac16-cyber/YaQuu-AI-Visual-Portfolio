@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -1211,7 +1211,7 @@
       line-height: 1.6;
     }
     @media (orientation: portrait) {
-      .rotate-notice { display: grid; }
+      .rotate-notice { display: none; }
     }
 
     @media (max-width: 620px) {
@@ -1227,6 +1227,339 @@
       .section-slide .title-xl { font-size: 44px; max-width: calc(100vw - 48px); }
       .gallery { grid-template-columns: 1fr; grid-template-rows: repeat(7, 360px); }
       .nav { right: 12px; bottom: 14px; }
+    }
+
+    @media (max-width: 760px) and (orientation: portrait) {
+      html,
+      body {
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      body {
+        overscroll-behavior-y: contain;
+      }
+      .deck,
+      .track {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        overflow: visible;
+        position: relative;
+      }
+      .track {
+        display: block;
+      }
+      .slide {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        padding: 58px 20px 76px;
+        overflow: hidden;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        transition: none;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .slide.hero {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+      }
+      .slide:not(:last-child) {
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      .slide::before {
+        background-size: 44px 44px;
+        mask-image: radial-gradient(circle at 50% 36%, black, transparent 78%);
+      }
+      .slide::after {
+        opacity: .32;
+      }
+      .reveal,
+      .active .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .nav,
+      .progress,
+      .rotate-notice {
+        display: none !important;
+      }
+      .topbar {
+        position: relative;
+        inset: auto;
+        order: -10;
+        margin: 0 0 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .topbar .meta:last-child {
+        display: none;
+      }
+      .meta,
+      .kicker {
+        font-size: 10px;
+        letter-spacing: .13em;
+      }
+      .title-xl {
+        font-size: clamp(46px, 14vw, 68px);
+        line-height: .94;
+        max-width: 100%;
+      }
+      .title-lg {
+        font-size: clamp(38px, 12vw, 58px);
+        line-height: .96;
+      }
+      .title-md {
+        font-size: clamp(32px, 10vw, 48px);
+        line-height: 1;
+      }
+      .lead {
+        font-size: 17px;
+        line-height: 1.42;
+        max-width: 100%;
+      }
+      .cn,
+      .muted {
+        font-size: 13px;
+        line-height: 1.68;
+      }
+      .cover-copy {
+        top: 66%;
+        width: calc(100vw - 40px);
+      }
+      .cover-copy .lead {
+        font-size: 18px;
+      }
+      .split,
+      .product-layout,
+      .film-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 0;
+        gap: 22px;
+      }
+      .stack,
+      .slide > .stack {
+        height: auto !important;
+        align-content: start;
+        gap: 16px;
+      }
+      .method-visual {
+        min-height: auto;
+        max-height: none;
+        gap: 10px;
+      }
+      .method-node {
+        grid-template-columns: 42px 1fr;
+        padding: 14px;
+      }
+      .cap-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .cap-card {
+        min-height: 128px;
+        padding: 18px;
+      }
+      .cap-card b {
+        font-size: 21px;
+      }
+      .brand-slide .split {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .brand-slide .title-lg {
+        font-size: clamp(42px, 12vw, 58px);
+      }
+      .logo-wall {
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        max-width: none;
+        gap: 10px;
+      }
+      .logo-tile {
+        height: 92px;
+        padding: 14px;
+      }
+      .logo-tile img {
+        height: 38px;
+        max-width: 78%;
+      }
+      .case-opening {
+        display: none;
+      }
+      .case-has-opening > .image-hero,
+      .case-has-opening > .topbar,
+      .case-has-opening > .case-panel,
+      .case-has-opening.case-ready > .image-hero,
+      .case-has-opening.case-ready > .topbar,
+      .case-has-opening.case-ready > .case-panel {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .case-has-opening > .image-hero {
+        position: relative;
+        inset: auto;
+        order: -5;
+        height: 58svh;
+        min-height: 360px;
+        border: 1px solid var(--line-soft);
+        box-shadow: var(--shadow);
+      }
+      .case-has-opening > .image-hero img,
+      .case-has-opening > .image-hero video {
+        transform: none;
+      }
+      .case-panel {
+        height: auto;
+        max-width: none;
+        align-content: start;
+        gap: 14px;
+      }
+      .thumb-row,
+      .detail-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        max-width: none;
+      }
+      .thumb-row .thumb:first-child,
+      .detail-strip .thumb:first-child {
+        grid-column: span 2;
+      }
+      .product-main {
+        height: auto;
+        min-height: 420px;
+        padding: 18px;
+      }
+      .product-main img {
+        width: 100%;
+        height: auto;
+        max-height: 72svh;
+      }
+      .section-slide {
+        min-height: 86svh;
+        justify-content: flex-end;
+      }
+      .section-slide .topbar {
+        display: flex !important;
+      }
+      .section-slide .image-hero {
+        position: absolute;
+        inset: 0;
+      }
+      .section-slide .image-hero img,
+      .section-slide .image-hero video {
+        transform: scale(1.02);
+      }
+      .section-line {
+        width: min(100%, 360px);
+        height: 4px;
+      }
+      .section-slide .title-xl,
+      .section-slide .lead,
+      .section-slide .cn {
+        max-width: 100%;
+      }
+      .section-visual {
+        display: none;
+      }
+      .video-section-bg video {
+        transform: scale(1.02);
+      }
+      .video-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        margin-top: 8px;
+        gap: 18px;
+      }
+      .video-card {
+        min-height: auto;
+        grid-template-rows: auto auto;
+      }
+      .video-card video {
+        aspect-ratio: 9 / 16;
+        height: auto;
+        object-fit: cover;
+      }
+      .video-meta {
+        padding: 13px 14px;
+      }
+      .main-player {
+        width: 100%;
+        max-height: none;
+      }
+      .main-player video {
+        aspect-ratio: 16 / 9;
+        height: auto;
+      }
+      .film-list {
+        gap: 10px;
+      }
+      .film-btn {
+        padding: 14px;
+      }
+      .gallery {
+        height: auto;
+        margin-top: 0;
+        padding-top: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 14px;
+      }
+      .gallery figure,
+      .gallery figure:nth-child(1),
+      .gallery figure:nth-child(4) {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 0;
+      }
+      .gallery img {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        object-fit: contain;
+        background: rgba(255,255,255,.04);
+      }
+      .workflow {
+        grid-template-columns: 1fr;
+        margin-top: 10px;
+        border-top: 1px solid var(--line);
+      }
+      .workflow .step {
+        min-height: 156px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .workflow .step:last-child {
+        border-bottom: 0;
+      }
+      .closing-qr {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: min(78vw, 320px);
+        margin: 0 auto;
+      }
+      .closing-copy {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: min(88vw, 420px);
+        margin: 22px auto 0;
+      }
     }
   </style>
 </head>
@@ -1483,6 +1816,7 @@
     let current = 0;
     let wheelLock = false;
     let caseOpeningTimers = [];
+    const mobilePortraitQuery = window.matchMedia('(max-width: 760px) and (orientation: portrait)');
     const sound = {
       ctx: null,
       master: null,
@@ -1490,6 +1824,10 @@
       started: false,
       lastTap: 0
     };
+
+    function isMobilePortrait() {
+      return mobilePortraitQuery.matches;
+    }
 
     function ensureAudio() {
       const AudioCtor = window.AudioContext || window.webkitAudioContext;
@@ -1612,6 +1950,18 @@
       pauseOffscreenVideos();
     }
 
+    function navigateTo(index) {
+      const target = Math.max(0, Math.min(slides.length - 1, index));
+      if (isMobilePortrait()) {
+        current = target;
+        slides[target].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+        pageNo.textContent = `${String(current + 1).padStart(2, '0')} / ${slides.length}`;
+        return;
+      }
+      goTo(target);
+    }
+
     function playCaseOpening(slide) {
       caseOpeningTimers.forEach(clearTimeout);
       caseOpeningTimers = [];
@@ -1638,16 +1988,18 @@
       });
     }
 
-    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+    document.getElementById('prevBtn').addEventListener('click', () => navigateTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => navigateTo(current + 1));
     window.addEventListener('keydown', event => {
+      const isDeckKey = event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === 'ArrowLeft' || event.key === 'PageUp';
+      if (isMobilePortrait() && isDeckKey) return;
       if (event.key === 'ArrowRight' || event.key === 'PageDown') {
         playTap();
-        goTo(current + 1);
+        navigateTo(current + 1);
       }
       if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
         playTap();
-        goTo(current - 1);
+        navigateTo(current - 1);
       }
       if (event.key === 'Escape') {
         playTap();
@@ -1658,18 +2010,25 @@
         indexPanel.classList.toggle('open');
       }
     });
-    window.addEventListener('resize', () => goTo(current));
+    window.addEventListener('resize', () => {
+      if (!isMobilePortrait()) goTo(current);
+    });
     window.addEventListener('wheel', event => {
+      if (isMobilePortrait()) return;
       if (wheelLock || Math.abs(event.deltaY) < 24) return;
       wheelLock = true;
-      goTo(current + (event.deltaY > 0 ? 1 : -1));
+      navigateTo(current + (event.deltaY > 0 ? 1 : -1));
       setTimeout(() => wheelLock = false, 850);
     }, { passive: true });
     let touchX = 0;
-    window.addEventListener('touchstart', event => touchX = event.touches[0].clientX, { passive: true });
+    window.addEventListener('touchstart', event => {
+      if (isMobilePortrait()) return;
+      touchX = event.touches[0].clientX;
+    }, { passive: true });
     window.addEventListener('touchend', event => {
+      if (isMobilePortrait()) return;
       const delta = event.changedTouches[0].clientX - touchX;
-      if (Math.abs(delta) > 50) goTo(current + (delta < 0 ? 1 : -1));
+      if (Math.abs(delta) > 50) navigateTo(current + (delta < 0 ? 1 : -1));
     }, { passive: true });
 
     slides.forEach((slide, i) => {
@@ -1677,7 +2036,7 @@
       btn.innerHTML = `<span class="meta">${String(i + 1).padStart(2, '0')}</span><b>${slide.dataset.title}</b>`;
       btn.addEventListener('click', () => {
         indexPanel.classList.remove('open');
-        goTo(i);
+        navigateTo(i);
       });
       indexGrid.appendChild(btn);
     });
@@ -1685,7 +2044,7 @@
       if (event.target === indexPanel) indexPanel.classList.remove('open');
     });
     document.querySelectorAll('[data-jump]').forEach(item => {
-      item.addEventListener('click', () => goTo(Number(item.dataset.jump) - 1));
+      item.addEventListener('click', () => navigateTo(Number(item.dataset.jump) - 1));
     });
 
     function openLightbox(img) {
